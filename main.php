@@ -34,8 +34,18 @@
 				case 'updateposition':
 					if (count($req) > 1) {
 						$d = json_decode(file_get_contents("php://input"));
-						echo json_encode($globalMethod->update("sk_position", $d, "pos_id=$req[1]"));
+						echo json_encode($globalMethod->update("sk_position", $d, "pos_id=".$req[1]));
 					} else {
+						http_response_code(403);
+					}
+				break;
+
+				//DELETE DATA
+				case 'deleteposition':
+					if (count($req) > 1) {
+						$d = json_decode(file_get_contents("php://input"));
+						echo json_encode($globalMethod->delete("sk_position", $d, "pos_id=".$req[1]));
+					}else{
 						http_response_code(403);
 					}
 				break;
